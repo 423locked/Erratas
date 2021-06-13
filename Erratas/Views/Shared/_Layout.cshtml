@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="~/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+    <div id="wrapper">
+
+        @await Html.PartialAsync("HeaderPartial")
+
+        @await Html.PartialAsync("MenuPartial")
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+                <header>
+                    <h1>
+                        This is Erratas, a modern social news aggregation,<br />
+                        news and tech themed forum.
+                    </h1>
+                    <blockquote>"Tell me and I forget. Teach me and I remember. Involve me and I learn." - Benjamin Franklin.</blockquote>
+                </header>
+                <div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        @await Html.PartialAsync("FooterPartial")
+
+    </div>
+
+    @await Html.PartialAsync("ScriptsPartial") 
+
+</body>
+</html>

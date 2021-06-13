@@ -1,0 +1,29 @@
+﻿@model IQueryable<Post>
+
+
+<div>
+    <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="">
+        <h2>Add a new post</h2>
+    </a>
+</div>
+
+
+@if (Model.Any())
+{
+    @foreach (Post post in Model)
+    {
+        <div class="enumerable-box">
+            <div class="edit-box">
+                <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">
+                    <h2>@post.Title</h2>
+                </a>
+                <a asp-area="Admin" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id"><h3>Delete</h3></a>
+            </div>
+
+        </div>
+    }
+}
+else
+{
+    <h1>There currently aren't any posts.</h1>
+}

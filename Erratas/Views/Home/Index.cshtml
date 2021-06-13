@@ -1,0 +1,14 @@
+﻿@model IQueryable<Category>
+
+@{ 
+    Layout = "_Layout";
+}
+
+<h2>Hello from the View!</h2>
+@if (Model.Any())
+{
+    @foreach(Category category in Model)
+    {
+        <p>@category.Title</p>
+    }
+}
