@@ -17,7 +17,6 @@ namespace Erratas.Controllers
             this.dataManager = data;
         }
 
-
         public IActionResult Index()
         {
             return View(dataManager.Categories.GetCategories());

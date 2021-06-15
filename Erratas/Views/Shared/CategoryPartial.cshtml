@@ -1,0 +1,23 @@
+﻿@model Category
+@{
+    string style = "style" + ViewData["styleIterator"];
+}
+
+<article class="@style">
+    <span class="image">
+        <img src="~/images/pic01.jpg" alt="" />
+    </span>
+    <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@Model.Id">
+        <h2>@Model.Title</h2>
+        <div class="content">
+            <p>@Model.Subtitle</p>
+        </div>
+        <object type="owo/uwu">
+            <div class="content">
+                <a class="deletelink" asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@Model.Id">
+                    <h2>Delete</h2>
+                </a>
+            </div>
+        </object>
+    </a>
+</article>

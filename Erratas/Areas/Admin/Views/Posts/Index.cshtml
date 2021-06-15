@@ -1,5 +1,7 @@
 ﻿@model IQueryable<Post>
-
+@{
+    int styleIterator = 0;
+}
 
 <div>
     <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="">
@@ -10,18 +12,13 @@
 
 @if (Model.Any())
 {
-    @foreach (Post post in Model)
-    {
-        <div class="enumerable-box">
-            <div class="edit-box">
-                <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">
-                    <h2>@post.Title</h2>
-                </a>
-                <a asp-area="Admin" asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id"><h3>Delete</h3></a>
-            </div>
-
-        </div>
-    }
+    <section class="tiles">
+        @foreach (Post post in Model)
+        {
+            styleIterator++;
+            @await Html.PartialAsync("PostPartial", post, new ViewDataDictionary(ViewData) { { "styleIterator", styleIterator } });
+        }
+    </section>
 }
 else
 {

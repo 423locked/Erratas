@@ -3341,3 +3341,11 @@ input, select, textarea {
 		flex-direction: row;
 		justify-content: space-between;
 	}
+
+	.deletelink{
+		color: #ECECEC !important;
+	}
+
+	.deletelink:hover{
+		color: rgb(139, 36, 49) !important;
+	}
