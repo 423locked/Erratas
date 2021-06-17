@@ -37,7 +37,11 @@ namespace Erratas.Domain.Repositories.EntityFramework
             if (post.Id == default)
                 context.Entry(post).State = EntityState.Added;
             else
-                context.Entry(post).State = EntityState.Modified;
+            {
+                string oldImagePath = context.Posts.AsNoTracking().FirstOrDefault(p => p.Id == post.Id).TitleImagePath;
+                if (post.TitleImagePath != oldImagePath || (oldImagePath == null && post.TitleImagePath != null))
+                    context.Entry(post).State = EntityState.Modified;
+            }
 
             context.SaveChanges();
         }

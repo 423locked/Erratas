@@ -1,4 +1,6 @@
-﻿using Erratas.Domain.Repositories;
+﻿using Erratas.Domain.Entities;
+using Erratas.Domain.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,5 +23,17 @@ namespace Erratas.Controllers
         {
             return View(dataManager.Categories.GetCategories());
         }
+
+        public IActionResult Show(string category)
+        {
+            IQueryable<Post> posts = dataManager.Posts
+                .GetPosts()
+                .Where(p => p.Category == category);
+
+            ViewBag.CurrentCategory = category;
+            return View(posts);
+        }
+
+
     }
 }

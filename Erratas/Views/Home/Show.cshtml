@@ -1,0 +1,20 @@
+﻿@model IQueryable<Post>
+@{ 
+    ViewBag.Title = ViewBag.CurrentCategory;
+    int styleIterator = 0;
+}
+
+@if (Model.Any())
+{
+<section class="tiles">
+    @foreach (Post post in Model)
+    {
+        styleIterator++;
+        @await Html.PartialAsync("PostPartial", post, new ViewDataDictionary(ViewData) { { "styleIterator", styleIterator } });
+    }
+</section>
+}
+else
+{
+    <h2>There aren't any posts with such category</h2>
+}

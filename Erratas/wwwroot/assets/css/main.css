@@ -3349,3 +3349,18 @@ input, select, textarea {
 	.deletelink:hover{
 		color: rgb(139, 36, 49) !important;
 	}
+
+	.fit-image {
+		width: 100%;
+		height: 100%;
+	}
+
+.article-corrections {
+	width: 360px;
+	height: 340px;
+}
+
+.external-image-corrections {
+	height: 100%;
+	object-fit: cover;
+}

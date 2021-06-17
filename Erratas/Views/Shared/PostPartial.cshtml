@@ -3,9 +3,16 @@
     string style = "style" + ViewData["styleIterator"];
 }
 
-<article class="@style">
-    <span class="image">
-        <img src="~/images/pic01.jpg" alt="" />
+<article class="@style article-corrections">
+    <span class="image fit-image">
+        @if (Model.TitleImagePath == null)
+        {
+            <img class="fit-image" src="~/images/pic01.jpg" alt="" />
+        }
+        else
+        {
+            <img class="external-image-corrections" src="~/images/@Model.TitleImagePath" alt="" />
+        }
     </span>
     <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id">
         <h2>@Model.Title</h2>

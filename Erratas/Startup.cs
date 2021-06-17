@@ -90,6 +90,7 @@ namespace Erratas
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapAreaControllerRoute(
                         name: "Admin",
                         areaName: "Admin",

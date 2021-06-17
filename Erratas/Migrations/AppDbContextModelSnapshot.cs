@@ -47,6 +47,9 @@ namespace Erratas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TitleImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -55,14 +58,14 @@ namespace Erratas.Migrations
                         new
                         {
                             Id = new Guid("63dc8fa6-07ae-4391-8916-e057f71239ce"),
-                            DateAdded = new DateTime(2021, 6, 12, 21, 39, 11, 871, DateTimeKind.Utc).AddTicks(3983),
+                            DateAdded = new DateTime(2021, 6, 16, 8, 35, 44, 676, DateTimeKind.Utc).AddTicks(9850),
                             Subtitle = "A very interesting activity.",
                             Title = "Programming"
                         },
                         new
                         {
                             Id = new Guid("70bf165a-700a-4156-91c0-e83fce0a277f"),
-                            DateAdded = new DateTime(2021, 6, 12, 21, 39, 11, 871, DateTimeKind.Utc).AddTicks(7816),
+                            DateAdded = new DateTime(2021, 6, 16, 8, 35, 44, 677, DateTimeKind.Utc).AddTicks(2659),
                             Subtitle = "A tough subject.",
                             Title = "Physics"
                         });
@@ -140,7 +143,7 @@ namespace Erratas.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "4a5a392f-3d58-4395-a4bc-c72db12d14bd",
+                            ConcurrencyStamp = "ca6d0aa2-7734-4abd-a72f-34af2c0603e9",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -239,13 +242,13 @@ namespace Erratas.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "71935494-a7de-4f4b-bd47-f3bff2cba019",
+                            ConcurrencyStamp = "0d0c579c-a4fc-470b-b341-dd9bbcbf6e61",
                             Email = "yaroslav05042005@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "YAROSLAV05042005@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE9X3B5dXLg96PmioTEiyCChPx70F9M51wgIId8xsvhrCp67br2Y/GYyDAbsdTJ2QQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKxODHUEZuof0r6gFJbLYdr3XcKh1Cd62pqGtgv377d4ddg17KqnL7NdJAAD6fJiMA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

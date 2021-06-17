@@ -17,5 +17,8 @@ namespace Erratas.Domain.Entities
 
         [Display(Name = "Category text")]
         public override string Text { get; set; }
+
+        [Display(Name = "Title image path")]
+        public string TitleImagePath { get; set; }
     }
 }
