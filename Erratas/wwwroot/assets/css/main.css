@@ -72,6 +72,46 @@ input, select, textarea {
 
 /* Basic */
 
+.upper {
+	margin-top: -10vh;
+}
+
+.search-div {
+	margin-top: -2vh;
+	margin-bottom: 5vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.search-input {
+	width: 50%;
+}
+
+.search-div img{
+	width: 40px;
+	height: 40px;
+	align-self: center;
+}
+
+@media screen and (max-width: 990px) {
+	.search-input {
+		width: 80% !important;
+	}
+	.upper {
+		margin-top: -5vh !important;
+	}
+	.search-div {
+		margin-top: -3vh !important;
+		margin-bottom: 3vh !important;
+	}
+	.search-div img {
+		width: 30px !important;
+		height: 30px !important;
+	}
+}
+
 	@-ms-viewport {
 		width: device-width;
 	}
@@ -231,6 +271,7 @@ input, select, textarea {
 			display: none;
 		}
 
+
 	}
 
 	@media screen and (max-width: 736px) {
@@ -244,6 +285,8 @@ input, select, textarea {
 		}
 
 	}
+
+
 
 	sub {
 		font-size: 0.8em;
@@ -2150,17 +2193,15 @@ input, select, textarea {
 		outline: 0;
 		padding: 0;
 		text-decoration: none;
-		width: 100%;
 	}
 
-		input[type="text"]:invalid,
-		input[type="password"]:invalid,
-		input[type="email"]:invalid,
-		input[type="tel"]:invalid,
-		select:invalid,
-		textarea:invalid {
-			box-shadow: none;
-		}
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+}
 
 		input[type="text"]:focus,
 		input[type="password"]:focus,
@@ -3364,3 +3405,6 @@ input, select, textarea {
 	height: 100%;
 	object-fit: cover;
 }
+
+
+

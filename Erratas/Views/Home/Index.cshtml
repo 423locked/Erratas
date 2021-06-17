@@ -4,11 +4,33 @@
     Layout = "_Layout";
 }
 
-<h2>Hello from the View!</h2>
+<header>
+    <h1>
+        This is Erratas, a modern social news aggregation,<br />
+        news and tech themed forum.
+    </h1>
+    <blockquote>"Tell me and I forget. Teach me and I remember. Involve me and I learn." - Benjamin Franklin.</blockquote>
+</header>
+
+<h2>Checkout posts covering this topics!</h2>
+
 @if (Model.Any())
 {
-    @foreach (Category category in Model)
-    {
-        <p>@category.Title</p>
-    }
+    int classCounter = 0;
+    string btnClass;
+    <ul class="actions fit">
+        @foreach (Category category in Model)
+        {
+            if (classCounter % 2 == 0) 
+                btnClass = "button primary fit";
+            else 
+                btnClass = "button fit";
+
+            <li>
+                <a class="@btnClass" asp-area="" asp-controller="Home" asp-action="Show" asp-route-category="@category.Title">@category.Title</a>
+            </li>
+
+            classCounter++;
+        }
+    </ul>
 }

@@ -1,5 +1,6 @@
 ﻿using Erratas.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,17 @@ namespace Erratas.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly DataManager dataManager;
-        public HomeController(DataManager data)
+        private readonly ILogger<HomeController> logger;
+
+        public HomeController(DataManager data, ILogger<HomeController> log)
         {
             this.dataManager = data;
+            this.logger = log;
         }
 
         public IActionResult Index()
         {
+            logger.LogInformation("[GET] /Admin/Home/Index Invoked");
             return View();
         }
     }

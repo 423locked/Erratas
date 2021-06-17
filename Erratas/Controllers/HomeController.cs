@@ -34,6 +34,10 @@ namespace Erratas.Controllers
             return View(posts);
         }
 
-
+        public IActionResult Post(Guid postId)
+        {
+            Post post = dataManager.Posts.GetPostById(postId);
+            return View("CertainPost", post);
+        }
     }
 }

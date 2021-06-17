@@ -1,11 +1,20 @@
 ﻿<!-- Header -->
 <header id="header">
+    
     <div class="inner">
 
-        <!-- Logo -->
-        <a href="index.html" class="logo">
-            <span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Erratas</span>
-        </a>
+        <div class="upper">
+            <!-- Logo -->
+            <a class="logo" asp-area="" asp-controller="Home" asp-action="Index">
+                <span class="symbol"><img src="~/images/logo.svg" alt="" /></span><span class="title">Erratas</span>
+            </a>
+        </div>
+
+
+        <div class="search-div">
+            <input type="text" class="search-input" placeholder="Search post" />
+            <img src="https://img.icons8.com/android/96/000000/search.png" />
+        </div>
 
         <!-- Nav -->
         <nav>

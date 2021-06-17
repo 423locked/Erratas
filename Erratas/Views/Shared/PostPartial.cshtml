@@ -1,6 +1,7 @@
 ﻿@model Post
 @{ 
     string style = "style" + ViewData["styleIterator"];
+    bool isAdmin = User.IsInRole("admin");
 }
 
 <article class="@style article-corrections">
@@ -14,17 +15,30 @@
             <img class="external-image-corrections" src="~/images/@Model.TitleImagePath" alt="" />
         }
     </span>
-    <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id">
-        <h2>@Model.Title</h2>
-        <div class="content">
-            <p>@Model.Subtitle</p>
-        </div>
-        <object type="uwu/owo">
+
+    @if (isAdmin)
+    {
+        <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id">
+            <h2>@Model.Title</h2>
             <div class="content">
-                <a class="deletelink" asp-area="Admin" asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id">
-                    <h2>Delete</h2>
-                </a>
+                <p>@Model.Subtitle</p>
             </div>
-        </object>
-    </a>
+            <object type="uwu/owo">
+                <div class="content">
+                    <a class="deletelink" asp-area="Admin" asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id">
+                        <h2>Delete</h2>
+                    </a>
+                </div>
+            </object>
+        </a>
+    }
+    else
+    {
+        <a asp-area="" asp-controller="Home" asp-action="Post" asp-route-postId="@Model.Id">
+            <h2>@Model.Title</h2>
+            <div class="content">
+                <p>@Model.Subtitle</p>
+            </div>
+        </a>
+    }
 </article>
