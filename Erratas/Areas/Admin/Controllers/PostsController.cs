@@ -48,9 +48,6 @@ namespace Erratas.Areas.Admin.Controllers
                         await file.CopyToAsync(fileStream);
                     }
                 }
-                else if (model.Id != default)
-                    model.TitleImagePath = dataManager.Posts.GetPostById(model.Id).TitleImagePath;
-
 
                 dataManager.Posts.SavePost(model);
                 return RedirectToAction("Index", "Posts");

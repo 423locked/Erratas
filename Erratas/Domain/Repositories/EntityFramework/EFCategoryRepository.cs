@@ -36,11 +36,13 @@ namespace Erratas.Domain.Repositories.EntityFramework
             if (category.Id == default)
                 context.Entry(category).State = EntityState.Added;
             else
-            {
-                string oldImagePath = context.Categories.AsNoTracking().FirstOrDefault(c => c.Id == category.Id).TitleImagePath;
-                if (category.TitleImagePath != oldImagePath || (oldImagePath == null && category.TitleImagePath != null))
-                    context.Entry(category).State = EntityState.Modified;
+            { 
+                // we simply set the ImagePath of the category to the older one if no new image was passed
+                if (category.TitleImagePath == null)
+                    category.TitleImagePath = context.Categories.AsNoTracking().FirstOrDefault(x => x.Id == category.Id).TitleImagePath;
+                context.Entry(category).State = EntityState.Modified;
             }
+            
 
             context.SaveChanges();
         }

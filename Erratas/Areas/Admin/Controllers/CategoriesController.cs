@@ -47,8 +47,7 @@ namespace Erratas.Areas.Admin.Controllers
                         await file.CopyToAsync(fileStream);
                     }
                 }
-                else if (model.Id != default)
-                    model.TitleImagePath = dataManager.Categories.GetCategoryById(model.Id).TitleImagePath;
+
 
                 dataManager.Categories.SaveCategory(model);
                 return RedirectToAction("Index", "Categories");
