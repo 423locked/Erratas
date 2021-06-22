@@ -1,0 +1,15 @@
+﻿@model List<Post>
+@{
+    // set the input tag placeholder to ViewBag.Query
+
+}
+<p>@ViewBag.Query</p>
+
+@if (Model.Any())
+{
+    <p>Posts: @Model.Count</p>
+}
+else
+{
+    <p>Sorry, we couldn't find posts with a search term of '@ViewBag.Query'.</p>
+}

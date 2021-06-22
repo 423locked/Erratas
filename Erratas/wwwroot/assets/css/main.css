@@ -77,7 +77,7 @@ input, select, textarea {
 }
 
 .search-div {
-	margin-top: -2vh;
+	/*margin-top: -2vh;*/
 	margin-bottom: 5vh;
 	display: flex;
 	flex-direction: row;
@@ -89,7 +89,7 @@ input, select, textarea {
 	width: 50%;
 }
 
-.search-div img{
+.search-div input[type="image"]{
 	width: 40px;
 	height: 40px;
 	align-self: center;
@@ -103,10 +103,10 @@ input, select, textarea {
 		margin-top: -5vh !important;
 	}
 	.search-div {
-		margin-top: -3vh !important;
+		/*margin-top: -3vh !important;*/
 		margin-bottom: 3vh !important;
 	}
-	.search-div img {
+	.search-div input[type="image"] {
 		width: 30px !important;
 		height: 30px !important;
 	}

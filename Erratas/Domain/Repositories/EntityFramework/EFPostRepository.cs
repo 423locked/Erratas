@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Erratas.Domain.Extensions;
 
 namespace Erratas.Domain.Repositories.EntityFramework
 {
@@ -47,6 +48,51 @@ namespace Erratas.Domain.Repositories.EntityFramework
             }
 
             context.SaveChanges();
+        }
+
+        public async Task<List<Post>> SearchPostsAsync(string keywords)
+        {
+            List<Post> result = new List<Post>();
+            List<Post> posts = GetPosts().ToList();
+            var titleTask = SearchInTitles(keywords, posts);
+            var textTask = SearchInText(keywords, posts);
+            List<Post> titlesList = await titleTask;
+            List<Post> textList = await textTask;
+
+            result.AddRange(titlesList);
+            result.AddRange(textList);
+            return result.Distinct().ToList();
+        }
+
+        public async Task<List<Post>> SearchInTitles(string keywords, List<Post> posts)
+        {
+            List<Post> returnList = new List<Post>();
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < posts.Count; i++)
+                    if ( (posts[i].Title.ToLower().Contains(keywords.ToLower())) 
+                        || (keywords.ToLower().Contains(posts[i].Title.ToLower())))
+                    {
+                        returnList.Add(posts[i]);
+                    }
+            });
+            return returnList;
+        }
+
+        public async Task<List<Post>> SearchInText(string keywords, List<Post> posts)
+        {
+            List<Post> returnList = new List<Post>();
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < posts.Count; i++)
+                    if (posts[i].Text != null)
+                        if ((posts[i].Text.ToLower().Contains(keywords.ToLower()))
+                            || (keywords.ToLower().Contains(posts[i].Text.ToLower())))
+                        {
+                            returnList.Add(posts[i]);
+                        }
+            });
+            return returnList;
         }
 
         public void DeletePost(Guid id)

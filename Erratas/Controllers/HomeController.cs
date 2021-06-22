@@ -49,5 +49,22 @@ namespace Erratas.Controllers
 
             return View("CertainPost", post);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string query)
+        {
+            ViewBag.Query = query;
+
+            var task = dataManager.Posts.SearchPostsAsync(query);
+            List<Post> posts = await task;
+            if (task.Wait(5000))
+            {
+                // task executed correctly in under 5 secs
+                return View(posts);
+            }
+            else 
+                return View();
+        }
     }
 }
