@@ -34,7 +34,10 @@ namespace Erratas.Domain.Repositories.EntityFramework
         public void SaveCategory(Category category)
         {
             if (category.Id == default)
+            {
+                category.DateAdded = DateTime.UtcNow;
                 context.Entry(category).State = EntityState.Added;
+            }
             else
             { 
                 // we simply set the ImagePath of the category to the older one if no new image was passed

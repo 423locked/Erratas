@@ -79,8 +79,18 @@ namespace Erratas
      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
+            }
+            else
+            {
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
+
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseStaticFiles();

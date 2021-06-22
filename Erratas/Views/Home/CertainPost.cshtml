@@ -1,1 +1,12 @@
-﻿<p>Certain post</p>
+﻿@model Post
+
+<div id="main">
+    <div class="inner">
+        <h1>@Model.Title</h1>
+        <h3>@Model.Subtitle</h3>
+        <h5>@Model.DateAdded</h5>
+        <span class="image main" style="border: 1px solid black;"><img src="~/images/@Model.TitleImagePath" alt="" /></span>
+        <div>@Html.Raw(Model.Text)</div>
+        <h4>Likes: @Model.AmountOfLikes</h4>
+    </div>
+</div>

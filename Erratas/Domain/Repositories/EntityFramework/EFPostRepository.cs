@@ -35,7 +35,10 @@ namespace Erratas.Domain.Repositories.EntityFramework
         public void SavePost(Post post)
         {
             if (post.Id == default)
+            {
+                post.DateAdded = DateTime.UtcNow;
                 context.Entry(post).State = EntityState.Added;
+            }
             else
             {
                 if (post.TitleImagePath == null)

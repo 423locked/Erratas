@@ -37,6 +37,16 @@ namespace Erratas.Controllers
         public IActionResult Post(Guid postId)
         {
             Post post = dataManager.Posts.GetPostById(postId);
+            if (post == null)
+            {
+                //throw new Exception("Post not found exception");
+
+                Response.StatusCode = 404;
+                ViewBag.ErrorCode = 404;
+                ViewBag.ErrorMessage = "Sorry, there is no such post. Please revise the initial link.";
+                return View("Error");
+            }
+
             return View("CertainPost", post);
         }
     }

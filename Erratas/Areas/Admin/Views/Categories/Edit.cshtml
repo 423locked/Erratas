@@ -3,6 +3,8 @@
     ViewBag.Title = "Edit a category";
 }
 
+<script src="~/js/ckeditor/ckeditor.js"></script>
+
 <div>
     <h2>@ViewBag.Title</h2>
     <div>
@@ -16,7 +18,7 @@
             else
             {
                 <input type="hidden" asp-for="Id" />
-                <input type="hidden" asp-for="DateAdded" value="@DateTime.UtcNow"/>
+                <input type="hidden" asp-for="DateAdded"/>
             }
 
             <div asp-validation-summary="All"></div>
@@ -64,3 +66,11 @@
         </form>
     </div>
 </div>
+
+
+<script>
+    window.onload = function () {
+        var newCKEdit = CKEDITOR.replace('@Html.IdFor(x => x.Text)');
+        newCKEdit.updateElement();
+    }
+</script>
