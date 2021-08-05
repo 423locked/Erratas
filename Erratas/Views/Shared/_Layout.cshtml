@@ -1,4 +1,8 @@
-﻿<!DOCTYPE HTML>
+﻿@{ 
+
+}
+
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -12,7 +16,7 @@
 
         @await Html.PartialAsync("HeaderPartial")
 
-        @await Html.PartialAsync("MenuPartial")
+        @await Html.PartialAsync("MenuPartial", TempData["isLogged"])
 
         <!-- Main -->
         <div id="main">

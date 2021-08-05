@@ -35,7 +35,7 @@ namespace Erratas
             services.AddTransient<IPostRepository, EFPostRepository>();
             services.AddTransient<DataManager>();
 
-
+            services.AddSession();
             //connecting database context
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
@@ -43,11 +43,12 @@ namespace Erratas
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
+                /*
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
-                options.Password.RequireDigit = true;
+                options.Password.RequireDigit = true;*/
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             //setting up authentication cookies
@@ -98,7 +99,8 @@ namespace Erratas
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
+            
             app.UseEndpoints(endpoints =>
             {
 
@@ -111,6 +113,12 @@ namespace Erratas
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "account",
+                    pattern: "{action}",
+                    defaults: new { Controller = "Account", Action = "Register" }
                 );
             });
         }

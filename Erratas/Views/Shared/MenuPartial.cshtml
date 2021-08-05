@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@model bool
+@{ 
     bool isAdmin = User.IsInRole("admin");
 }
 
@@ -23,4 +24,18 @@
         <li><a asp-area="" asp-controller="Home" asp-action="Show" asp-route-category="Programming">Programming</a></li>
         <li><a asp-area="" asp-controller="Home" asp-action="Show" asp-route-category="Physics">Physics</a></li>
     </ul>
+
+    <br />
+
+    @if (Model)
+    {
+        <h4>You are logged in as @TempData["email"]</h4>
+        <br />
+        <h3><a asp-area="" asp-controller="Account" asp-action="Logout" style="color: indianred;">Log out</a></h3>
+    }
+    else
+    {
+        <h3><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></h3>
+        <h3><a asp-area="" asp-controller="Account" asp-action="Login">Log in now</a></h3>
+    }
 </nav>

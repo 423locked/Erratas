@@ -1,0 +1,44 @@
+﻿@model UserRegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h1>User Registration</h1>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+                @if (ViewBag.ErrorList != null)
+                {
+                    <div style="color: darkred; font-family: "Source Sans Pro", Helvetica, sans-serif;">
+                        @foreach (var error in ViewBag.ErrorList)
+                        {
+                            @if (!error.Description.Contains("User name"))
+                            {
+                                <h4>@error.Description</h4>
+                            }
+                        }
+                    </div>
+                }
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+    </div>
+</div>
