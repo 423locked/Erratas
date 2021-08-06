@@ -1,5 +1,4 @@
-﻿@model bool
-@{ 
+﻿@{ 
     bool isAdmin = User.IsInRole("admin");
 }
 
@@ -27,9 +26,9 @@
 
     <br />
 
-    @if (Model)
+    @if (User.Identity.IsAuthenticated)
     {
-        <h4>You are logged in as @TempData["email"]</h4>
+        <h4>You are logged in as @User.Identity.Name</h4>
         <br />
         <h3><a asp-area="" asp-controller="Account" asp-action="Logout" style="color: indianred;">Log out</a></h3>
     }

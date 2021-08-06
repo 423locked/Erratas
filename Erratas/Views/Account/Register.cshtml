@@ -11,7 +11,7 @@
         <form method="post">
                 @if (ViewBag.ErrorList != null)
                 {
-                    <div style="color: darkred; font-family: "Source Sans Pro", Helvetica, sans-serif;">
+                    <div style="color: darkred; font-family: 'Source Sans Pro', 'Helvetica', sans-serif;">
                         @foreach (var error in ViewBag.ErrorList)
                         {
                             @if (!error.Description.Contains("User name"))

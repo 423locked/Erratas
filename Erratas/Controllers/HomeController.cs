@@ -1,5 +1,6 @@
 ﻿using Erratas.Domain.Entities;
 using Erratas.Domain.Repositories;
+using Erratas.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,9 +20,10 @@ namespace Erratas.Controllers
             this.dataManager = data;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            return View(dataManager.Categories.GetCategories());
+            IQueryable<Category> categories = dataManager.Categories.GetCategories();
+            return View(await PaginatedList<Category>.CreateAsync(categories, pageIndex, 3));
         }
 
         public IActionResult Show(string category)

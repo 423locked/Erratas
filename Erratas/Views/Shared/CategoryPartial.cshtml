@@ -14,17 +14,29 @@
             <img class="external-image-corrections" src="~/images/@Model.TitleImagePath" alt="" />
         }
     </span>
-    <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@Model.Id">
-        <h2>@Model.Title</h2>
-        <div class="content">
-            <p>@Model.Subtitle</p>
-        </div>
-        <object type="owo/uwu">
+    @if (User.IsInRole("admin"))
+    {
+        <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@Model.Id">
+            <h2>@Model.Title</h2>
             <div class="content">
-                <a class="deletelink" asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@Model.Id">
-                    <h2>Delete</h2>
-                </a>
+                <p>@Model.Subtitle</p>
             </div>
-        </object>
-    </a>
+            <object type="owo/uwu">
+                <div class="content">
+                    <a class="deletelink" asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@Model.Id">
+                        <h2>Delete</h2>
+                    </a>
+                </div>
+            </object>
+        </a>
+    }
+    else
+    {
+        <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@Model.Id">
+            <h2>@Model.Title</h2>
+            <div class="content">
+                <p>@Model.Subtitle</p>
+            </div>
+        </a>
+    }
 </article>

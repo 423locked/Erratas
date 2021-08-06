@@ -1,7 +1,9 @@
-﻿@model IQueryable<Category>
-
+﻿@model PaginatedList<Category>
 @{
-    Layout = "_Layout";
+    int styleIterator = 0;
+
+    string previousClass = Model.PreviousPageExists ? "button" : "button disabled";
+    string nextClass = Model.NextPageExists ? "button primary" : "button primary disabled";
 }
 
 <header>
@@ -16,21 +18,19 @@
 
 @if (Model.Any())
 {
-    int classCounter = 0;
-    string btnClass;
-    <ul class="actions fit">
+    <section class="tiles">
         @foreach (Category category in Model)
         {
-            if (classCounter % 2 == 0) 
-                btnClass = "button primary fit";
-            else 
-                btnClass = "button fit";
-
-            <li>
-                <a class="@btnClass" asp-area="" asp-controller="Home" asp-action="Show" asp-route-category="@category.Title">@category.Title</a>
-            </li>
-
-            classCounter++;
+            styleIterator++;
+            @await Html.PartialAsync("CategoryPartial", category, new ViewDataDictionary(ViewData) { { "styleIterator", styleIterator } });
         }
-    </ul>
+    </section>
+    <div style="margin-top: 5vh;">
+        <a class="@previousClass" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
+        <a class="@nextClass" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
+    </div>
+}
+else
+{
+    <h1>There are no categories yet.</h1>
 }

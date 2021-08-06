@@ -43,15 +43,12 @@ namespace Erratas.Controllers
                         model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
-                        TempData["isLogged"] = true;
-                        TempData["email"] = user.Email;
                         return Redirect(returnUrl ?? "/");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Username), "Incorrect username or password");
             }
 
-            TempData["isLogged"] = false;
             return View(model);
         }
 
@@ -92,7 +89,6 @@ namespace Erratas.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            TempData["isLogged"] = false;
             return RedirectToAction("Index", "Home");
         }
     }
