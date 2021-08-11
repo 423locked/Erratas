@@ -35,5 +35,14 @@ namespace Erratas.Models
             List<T> items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
+
+        // overloaded a method to use not only IQuerable<T>, but List<T>
+        public static PaginatedList<T> CreateAsync(List<T> source, int pageIndex, int pageSize)
+        {
+            int count = source.Count();
+            // skip all the previous entities (index * amount) and take (amount)
+            List<T> items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+        }
     }
 }

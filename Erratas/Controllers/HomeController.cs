@@ -3,6 +3,7 @@ using Erratas.Domain.Repositories;
 using Erratas.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -26,14 +27,16 @@ namespace Erratas.Controllers
             return View(await PaginatedList<Category>.CreateAsync(categories, pageIndex, 3));
         }
 
-        public IActionResult Show(string category)
+        public async Task<IActionResult> Show(string category, int pageIndex = 1)
         {
             IQueryable<Post> posts = dataManager.Posts
                 .GetPosts()
                 .Where(p => p.Category == category);
 
             ViewBag.CurrentCategory = category;
-            return View(posts);
+            ViewBag.CollectionLength = await posts.CountAsync();
+
+            return View(await PaginatedList<Post>.CreateAsync(posts, pageIndex, 3));
         }
 
         public IActionResult Post(Guid postId)
@@ -52,9 +55,15 @@ namespace Erratas.Controllers
             return View("CertainPost", post);
         }
 
+        public async Task<IActionResult> Posts(int pageIndex = 1)
+        {
+            IQueryable<Post> posts = dataManager.Posts.GetPosts();
+            ViewBag.CollectionLength = await posts.CountAsync();
 
-        [HttpPost]
-        public async Task<IActionResult> Search(string query)
+            return View(await PaginatedList<Post>.CreateAsync(posts, pageIndex, 9));
+        }
+
+        public async Task<IActionResult> Search(string query, int pageIndex = 1)
         {
             ViewBag.Query = query;
 
@@ -63,7 +72,8 @@ namespace Erratas.Controllers
             if (task.Wait(5000))
             {
                 // task executed correctly in under 5 secs
-                return View(posts);
+                ViewBag.CollectionLength = posts.Count;
+                return View(PaginatedList<Post>.CreateAsync(posts, pageIndex, 3));
             }
             else 
                 return View();

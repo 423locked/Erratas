@@ -1,5 +1,6 @@
 ﻿using Erratas.Domain.Entities;
 using Erratas.Domain.Repositories;
+using Erratas.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,10 @@ namespace Erratas.Areas.Admin.Controllers
             this.hostEnvironment = env;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            return View(dataManager.Posts.GetPosts());
+            IQueryable<Post> posts = dataManager.Posts.GetPosts();
+            return View(await PaginatedList<Post>.CreateAsync(posts, pageIndex, 9));
         }
 
         public IActionResult Edit(Guid id)

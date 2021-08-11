@@ -1,13 +1,16 @@
-﻿@model List<Post>
+﻿@model PaginatedList<Post>
 @{
     // set the input tag placeholder to ViewBag.Query
     int styleIterator = 0;
+    ViewBag.Title = "Erratas";
+    string previousClass = Model.PreviousPageExists ? "button" : "button disabled";
+    string nextClass = Model.NextPageExists ? "button primary" : "button primary disabled";
 }
 <p>@ViewBag.Query</p>
 
 @if (Model.Any())
 {
-    <p>Posts: @Model.Count</p>
+    <p>Posts: @ViewBag.CollectionLength</p>
     <section class="tiles">
         @foreach (Post post in Model)
         {
@@ -15,8 +18,12 @@
             @await Html.PartialAsync("PostPartial", post, new ViewDataDictionary(ViewData) { { "styleIterator", styleIterator } });
         }
     </section>
+    <div style="margin-top: 5vh;">
+        <a class="@previousClass" asp-action="Search" asp-route-query="@ViewBag.Query" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
+        <a class="@nextClass" asp-action="Search" asp-route-query="@ViewBag.Query" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
+    </div>
 }
 else
 {
-    <p>Sorry, we couldn't find posts with a search term of '@ViewBag.Query'.</p>
+    <p>Sorry, we couldn't find any posts with a search term of '@ViewBag.Query'.</p>
 }

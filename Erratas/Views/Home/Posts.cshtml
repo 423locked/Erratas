@@ -1,13 +1,13 @@
 ﻿@model PaginatedList<Post>
 @{
-    ViewBag.Title = ViewBag.CurrentCategory;
+    // set the input tag placeholder to ViewBag.Query
     int styleIterator = 0;
-
+    ViewBag.Title = "Erratas";
     string previousClass = Model.PreviousPageExists ? "button" : "button disabled";
     string nextClass = Model.NextPageExists ? "button primary" : "button primary disabled";
 }
 
-<h1>@ViewBag.CurrentCategory</h1>
+
 @if (Model.Any())
 {
     <p>Posts: @ViewBag.CollectionLength</p>
@@ -19,11 +19,11 @@
         }
     </section>
     <div style="margin-top: 5vh;">
-        <a class="@previousClass" asp-action="Show" asp-route-category="@ViewBag.CurrentCategory" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
-        <a class="@nextClass" asp-action="Show" asp-route-category="@ViewBag.CurrentCategory" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
+        <a class="@previousClass" asp-action="Posts" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
+        <a class="@nextClass" asp-action="Posts" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
     </div>
 }
 else
 {
-    <h2>There aren't any posts with such category</h2>
+    <p>There are no posts, unfortunately.</p>
 }

@@ -1,7 +1,7 @@
 ﻿@model PaginatedList<Category>
 @{
     int styleIterator = 0;
-
+    ViewBag.Title = "Erratas";
     string previousClass = Model.PreviousPageExists ? "button" : "button disabled";
     string nextClass = Model.NextPageExists ? "button primary" : "button primary disabled";
 }

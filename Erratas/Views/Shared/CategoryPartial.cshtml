@@ -32,7 +32,7 @@
     }
     else
     {
-        <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@Model.Id">
+        <a asp-area="" asp-controller="Home" asp-action="Show" asp-route-category="@Model.Title">
             <h2>@Model.Title</h2>
             <div class="content">
                 <p>@Model.Subtitle</p>

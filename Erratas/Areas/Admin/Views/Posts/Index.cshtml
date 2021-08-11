@@ -1,6 +1,9 @@
-﻿@model IQueryable<Post>
+﻿@model PaginatedList<Post>
 @{
     int styleIterator = 0;
+
+    string previousClass = Model.PreviousPageExists ? "button" : "button disabled";
+    string nextClass = Model.NextPageExists ? "button primary" : "button primary disabled";
 }
 
 <div>
@@ -19,6 +22,10 @@
             @await Html.PartialAsync("PostPartial", post, new ViewDataDictionary(ViewData) { { "styleIterator", styleIterator } });
         }
     </section>
+    <div style="margin-top: 5vh;">
+        <a class="@previousClass" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
+        <a class="@nextClass" asp-action="Index" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
+    </div>
 }
 else
 {
