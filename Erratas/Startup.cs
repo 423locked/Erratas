@@ -34,6 +34,7 @@ namespace Erratas
             services.AddTransient<ICategoryRepository, EFCategoryRepository>();
             services.AddTransient<IPostRepository, EFPostRepository>();
             services.AddTransient<IContactCustomersRepository, EFContactCustomersRepository>();
+            services.AddTransient<IUserLikedPostsRepository, EFUserLikedPostsRepository>();
             services.AddTransient<DataManager>();
 
             services.AddSession();

@@ -16,6 +16,7 @@ namespace Erratas.Domain
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ContactCustomer> ContactCustomers { get; set; }
+        public DbSet<UserLikedPosts> UserLikedPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
