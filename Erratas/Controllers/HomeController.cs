@@ -90,9 +90,13 @@ namespace Erratas.Controllers
         }
 
         [Authorize]
-        public IActionResult LikePost(Guid postId, Guid userId, string returnUrl)
+        public IActionResult LikePost(Guid postId, string returnUrl)
         {
-            
+            if (!dataManager.UserLikedPosts.IsPostLiked(postId))
+            {
+                dataManager.UserLikedPosts.AddPost(postId);
+                dataManager.Posts.LikePost(postId);
+            }
             return Redirect(returnUrl ?? "/");
         }
     }

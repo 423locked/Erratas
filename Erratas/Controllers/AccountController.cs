@@ -1,4 +1,5 @@
 ﻿using Erratas.Domain.Entities;
+using Erratas.Domain.Repositories;
 using Erratas.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,12 +14,14 @@ namespace Erratas.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly DataManager dataManager;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        public AccountController(UserManager<IdentityUser> user, SignInManager<IdentityUser> sign)
+        public AccountController(UserManager<IdentityUser> user, SignInManager<IdentityUser> sign, DataManager data)
         {
             this.userManager = user;
             this.signInManager = sign;
+            this.dataManager = data;
         }
 
         [HttpGet]
@@ -72,6 +75,7 @@ namespace Erratas.Controllers
                 if (result.Succeeded)
                 {                
                     await signInManager.SignInAsync(user, isPersistent: true);
+                    dataManager.UserLikedPosts.AddUser(Guid.Parse(user.Id));
                     return RedirectToAction("Index", "Home");
                 }
                 else

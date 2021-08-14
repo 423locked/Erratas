@@ -10,5 +10,6 @@
         <span class="image main" style="border: 1px solid black;"><img src="~/images/@Model.TitleImagePath" alt="" /></span>
         <div>@Html.Raw(Model.Text)</div>
         <h4>Likes: @Model.AmountOfLikes</h4>
+        <a asp-area="" asp-controller="Home" asp-action="LikePost" asp-route-postId="@Model.Id">Like a post</a>
     </div>
 </div>
