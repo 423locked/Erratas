@@ -6,22 +6,25 @@
     <h2>Categories</h2>
     <hr />
     @if (isAdmin)
-    {
+     {
         <ul>
             <li><b>Admin</b></li>
             <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Manage Content</a></li>
             <li><a asp-area="Admin" asp-controller="Posts" asp-action="Index">Posts</a></li>
             <li><a asp-area="Admin" asp-controller="Categories" asp-action="Index">Categories</a></li>
+            <li><a asp-area="Admin" asp-controller="Home" asp-action="CustomerIssues">Issues</a></li>
         </ul>
 
         <hr />
     }
-
-    <ul>
-        <li><a asp-area="" asp-controller="Home" asp-action="Index"><b>Home</b></a></li>
-        <li><a asp-area="" asp-controller="Home" asp-action="Posts">Posts</a></li>
-        <li><a asp-area="" asp-controller="Home" asp-action="Index">Categories</a></li>
-    </ul>
+    else
+    { 
+        <ul>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index"><b>Home</b></a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Posts">Posts</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Categories</a></li>
+        </ul>
+    }
 
     <br />
 

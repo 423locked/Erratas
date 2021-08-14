@@ -1,0 +1,29 @@
+﻿@model IQueryable<ContactCustomer>
+@{
+
+}
+
+<div class="table-wrapper">
+    <table class="alt">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Issue</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.DateAdded.ToShortDateString()</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.Text</td>
+                    <td><a asp-area="Admin" asp-controller="Home" asp-action="ResolveCustomerIssue" asp-route-id="@customer.Id">remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

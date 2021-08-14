@@ -4,14 +4,16 @@ using Erratas.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Erratas.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210812075604_ContactCustomerCreation")]
+    partial class ContactCustomerCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,14 +60,14 @@ namespace Erratas.Migrations
                         new
                         {
                             Id = new Guid("63dc8fa6-07ae-4391-8916-e057f71239ce"),
-                            DateAdded = new DateTime(2021, 8, 12, 8, 3, 10, 262, DateTimeKind.Utc).AddTicks(9605),
+                            DateAdded = new DateTime(2021, 8, 12, 7, 56, 3, 575, DateTimeKind.Utc).AddTicks(4501),
                             Subtitle = "A very interesting activity.",
                             Title = "Programming"
                         },
                         new
                         {
                             Id = new Guid("70bf165a-700a-4156-91c0-e83fce0a277f"),
-                            DateAdded = new DateTime(2021, 8, 12, 8, 3, 10, 263, DateTimeKind.Utc).AddTicks(2389),
+                            DateAdded = new DateTime(2021, 8, 12, 7, 56, 3, 575, DateTimeKind.Utc).AddTicks(7139),
                             Subtitle = "A tough subject.",
                             Title = "Physics"
                         });
@@ -84,12 +86,27 @@ namespace Erratas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Subtitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Text")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -169,7 +186,7 @@ namespace Erratas.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "037d1e74-be47-4b41-b610-dca7632b97b1",
+                            ConcurrencyStamp = "237dc657-b8f5-4a5c-ac70-31b6a34f630d",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -268,13 +285,13 @@ namespace Erratas.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2909a454-9152-4525-8c33-99d5e172c8e0",
+                            ConcurrencyStamp = "50e977aa-77e4-4b84-b5c3-aa4f0389cc25",
                             Email = "yaroslav05042005@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "YAROSLAV05042005@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPrFQxU+OihZwiNetqkAPpO4a2IuxAz6f/D5j88ZSiVSaP0y0t615Ofm2nEL1LCYdg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEALibrXn4OwlizaUkbT8KyvKknaskQjalPeNKBO2M3rdhgCO0lJOH+YsqV+FmrzcsQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

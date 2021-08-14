@@ -33,6 +33,7 @@ namespace Erratas
             //connecting services (Repos and a repo data manager)
             services.AddTransient<ICategoryRepository, EFCategoryRepository>();
             services.AddTransient<IPostRepository, EFPostRepository>();
+            services.AddTransient<IContactCustomersRepository, EFContactCustomersRepository>();
             services.AddTransient<DataManager>();
 
             services.AddSession();

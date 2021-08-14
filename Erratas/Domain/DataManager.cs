@@ -10,11 +10,12 @@ namespace Erratas.Domain.Repositories
     {
         public ICategoryRepository Categories { get; set; }
         public IPostRepository Posts { get; set; }
-
-        public DataManager(ICategoryRepository categoryRepository, IPostRepository postRepository)
+        public IContactCustomersRepository ContactCustomers { get; set; }
+        public DataManager(ICategoryRepository categoryRepository, IPostRepository postRepository, IContactCustomersRepository contactCustomersRepository)
         {
             Categories = categoryRepository;
             Posts = postRepository;
+            ContactCustomers = contactCustomersRepository;
         }
     }
 }

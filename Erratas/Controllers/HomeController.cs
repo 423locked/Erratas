@@ -1,6 +1,7 @@
 ﻿using Erratas.Domain.Entities;
 using Erratas.Domain.Repositories;
 using Erratas.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -77,6 +78,22 @@ namespace Erratas.Controllers
             }
             else 
                 return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult SubmitContactForm(ContactCustomer customer)
+        {
+            ViewBag.Name = customer.Name;
+            dataManager.ContactCustomers.SaveContactCustomer(customer);
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult LikePost(Guid postId, Guid userId, string returnUrl)
+        {
+            
+            return Redirect(returnUrl ?? "/");
         }
     }
 }
