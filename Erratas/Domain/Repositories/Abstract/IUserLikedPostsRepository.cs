@@ -12,5 +12,6 @@ namespace Erratas.Domain.Repositories.Abstract
         void AddUser(Guid userId);
         void AddPost(Guid postId);
         bool IsPostLiked(Guid postId);
+        void RemovePost(Guid postId);
     }
 }

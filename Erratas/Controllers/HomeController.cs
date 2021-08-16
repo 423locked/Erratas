@@ -52,6 +52,7 @@ namespace Erratas.Controllers
                 ViewBag.ErrorMessage = "Sorry, there is no such post. Please revise the initial link.";
                 return View("Error");
             }
+            ViewBag.isLiked = dataManager.UserLikedPosts.IsPostLiked(postId);
 
             return View("CertainPost", post);
         }
@@ -90,14 +91,27 @@ namespace Erratas.Controllers
         }
 
         [Authorize]
-        public IActionResult LikePost(Guid postId, string returnUrl)
+        public IActionResult LikePost(Guid postId)
         {
             if (!dataManager.UserLikedPosts.IsPostLiked(postId))
             {
                 dataManager.UserLikedPosts.AddPost(postId);
                 dataManager.Posts.LikePost(postId);
             }
-            return Redirect(returnUrl ?? "/");
+            
+            return RedirectToAction("Post", new { postId = postId } );
+        }
+
+        [Authorize]
+        public IActionResult RemoveLike(Guid postId)
+        {
+            if (dataManager.UserLikedPosts.IsPostLiked(postId))
+            {
+                dataManager.UserLikedPosts.RemovePost(postId);
+                dataManager.Posts.RemoveLike(postId);
+            }
+
+            return RedirectToAction("Post", new { postId = postId });
         }
     }
 }

@@ -33,12 +33,15 @@ namespace Erratas.Domain.Repositories.EntityFramework
         public void AddPost(Guid postId)
         {
             Guid userId = httpContext.GetUserId();
-            UserLikedPosts user = context.UserLikedPosts.FirstOrDefault(x => x.Id == userId);
-            if (user.ListOfPosts == null) 
-                user.ListOfPosts = postId.ToString();
-            else 
-                user.ListOfPosts += $" {postId.ToString()}";
-            context.SaveChanges();
+            if (userId != Guid.Empty)
+            {
+                UserLikedPosts user = context.UserLikedPosts.FirstOrDefault(x => x.Id == userId);
+                if (user.ListOfPosts == null)
+                    user.ListOfPosts = postId.ToString();
+                else
+                    user.ListOfPosts += $" {postId.ToString()}";
+                context.SaveChanges();
+            }
         }
 
         public UserLikedPosts GetUser(Guid userId)
@@ -49,13 +52,28 @@ namespace Erratas.Domain.Repositories.EntityFramework
         public bool IsPostLiked(Guid postId)
         {
             Guid userId = httpContext.GetUserId();
-            string posts = GetUser(userId).ListOfPosts;
-            if (posts == null) return false;
-            foreach(string post in posts.Split(' '))
+            if (userId != Guid.Empty)
             {
-                if (postId.ToString() == post) return true;
+                string posts = GetUser(userId).ListOfPosts;
+                if (posts == null) return false;
+                foreach (string post in posts.Split(' '))
+                {
+                    if (postId.ToString() == post) return true;
+                }
+                return false;
             }
             return false;
+        }
+
+        public void RemovePost(Guid postId)
+        {
+            Guid userId = httpContext.GetUserId();
+            if (userId != Guid.Empty)
+            {
+                UserLikedPosts user = context.UserLikedPosts.FirstOrDefault(x => x.Id == userId);
+                user.ListOfPosts = user.ListOfPosts.Replace($" {postId.ToString()}", "");
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -107,5 +107,12 @@ namespace Erratas.Domain.Repositories.EntityFramework
             post.AmountOfLikes++;
             context.SaveChanges();
         }
+
+        public void RemoveLike(Guid id)
+        {
+            Post post = GetPostById(id);
+            post.AmountOfLikes--;
+            context.SaveChanges();
+        }
     }
 }

@@ -9,7 +9,11 @@ namespace Erratas.Domain.Extensions
 {
     public static class Extensions
     {
-        public static Guid GetUserId(this IHttpContextAccessor httpContext) 
-            => Guid.Parse(httpContext.HttpContext.User?.FindFirstValue(ClaimTypes.NameIdentifier));
+        public static Guid GetUserId(this IHttpContextAccessor httpContext)
+        {
+            if (httpContext.HttpContext.User?.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+                return Guid.Empty;
+            return Guid.Parse(httpContext.HttpContext.User?.FindFirstValue(ClaimTypes.NameIdentifier));
+        }
     }
 }
